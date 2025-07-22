@@ -4,6 +4,7 @@ using Microsoft.Azure.Functions.Worker.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 var builder = FunctionsApplication.CreateBuilder(args);
 
@@ -23,7 +24,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 var host = builder.Build();
 
+var logger = host.Services.GetRequiredService<ILogger<Program>>();
+
 // Apply migrations
-MigrationInitializer.ApplyMigrations(host.Services);
+MigrationInitializer.ApplyMigrations(host.Services, logger);
 
 host.Run();

@@ -3,6 +3,7 @@ using CommonApi.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace CommonApi
 {
@@ -33,7 +34,7 @@ namespace CommonApi
 
     public static class MigrationInitializer
     {
-        public static void ApplyMigrations(IServiceProvider services)
+        public static void ApplyMigrations(IServiceProvider services, ILogger logger)
         {
             using (var scope = services.CreateScope())
             {
@@ -42,10 +43,11 @@ namespace CommonApi
                 {
                     var context = scopedServices.GetRequiredService<ApplicationDbContext>();
                     context.Database.Migrate();
+                    logger.LogInformation("Migrations applied successfully.");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"An error occurred while applying migrations: {ex.Message}");
+                    logger.LogError(ex, "An error occurred while applying migrations.");
                 }
             }
         }
