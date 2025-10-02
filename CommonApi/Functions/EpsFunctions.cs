@@ -18,7 +18,7 @@ namespace CommonApi.Functions
         }
 
         [Function("GetAllEps")]
-        public HttpResponseData GetAllEps([HttpTrigger(AuthorizationLevel.Function, "get", Route = "eps")] HttpRequestData req)
+        public HttpResponseData GetAllEps([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "eps")] HttpRequestData req)
         {
             var eps = _context.Eps.ToList();
 
@@ -28,7 +28,7 @@ namespace CommonApi.Functions
         }
 
         [Function("GetEpsById")]
-        public HttpResponseData GetEpsById([HttpTrigger(AuthorizationLevel.Function, "get", Route = "eps/{id}")] HttpRequestData req, Guid id)
+        public HttpResponseData GetEpsById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "eps/{id}")] HttpRequestData req, Guid id)
         {
             var eps = _context.Eps.FirstOrDefault(e => e.Id == id);
             var response = req.CreateResponse(eps != null ? System.Net.HttpStatusCode.OK : System.Net.HttpStatusCode.NotFound);

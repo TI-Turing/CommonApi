@@ -18,7 +18,7 @@ namespace CommonApi.Functions
         }
 
         [Function("GetAllGeneros")]
-        public HttpResponseData GetAllGeneros([HttpTrigger(AuthorizationLevel.Function, "get", Route = "generos")] HttpRequestData req)
+        public HttpResponseData GetAllGeneros([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "generos")] HttpRequestData req)
         {
             var generos = _context.Generos.ToList();
 
@@ -28,7 +28,7 @@ namespace CommonApi.Functions
         }
 
         [Function("GetGeneroById")]
-        public HttpResponseData GetGeneroById([HttpTrigger(AuthorizationLevel.Function, "get", Route = "generos/{id}")] HttpRequestData req, Guid id)
+        public HttpResponseData GetGeneroById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "generos/{id}")] HttpRequestData req, Guid id)
         {
             var genero = _context.Generos.FirstOrDefault(g => g.Id == id);
             var response = req.CreateResponse(genero != null ? System.Net.HttpStatusCode.OK : System.Net.HttpStatusCode.NotFound);

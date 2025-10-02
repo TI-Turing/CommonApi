@@ -18,7 +18,7 @@ namespace CommonApi.Functions
         }
 
         [Function("GetAllPaises")]
-        public HttpResponseData GetAllPaises([HttpTrigger(AuthorizationLevel.Function, "get", Route = "paises")] HttpRequestData req)
+        public HttpResponseData GetAllPaises([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "paises")] HttpRequestData req)
         {
             var paises = _context.Paises.ToList();
 
@@ -28,7 +28,7 @@ namespace CommonApi.Functions
         }
 
         [Function("GetPaisById")]
-        public HttpResponseData GetPaisById([HttpTrigger(AuthorizationLevel.Function, "get", Route = "paises/{id}")] HttpRequestData req, Guid id)
+        public HttpResponseData GetPaisById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "paises/{id}")] HttpRequestData req, Guid id)
         {
             var pais = _context.Paises.FirstOrDefault(p => p.Id == id);
             var response = req.CreateResponse(pais != null ? System.Net.HttpStatusCode.OK : System.Net.HttpStatusCode.NotFound);

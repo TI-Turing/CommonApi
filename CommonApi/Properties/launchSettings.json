@@ -2,8 +2,14 @@
   "profiles": {
     "CommonApi": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7189",
-      "launchBrowser": false
+      "commandLineArgs": "--port 7189"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "containerRunArguments": "--init",
+      "httpPort": 32241,
+      "useSSL": false
     }
   }
 }

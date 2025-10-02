@@ -4,5 +4,6 @@
         "AzureWebJobsStorage": "UseDevelopmentStorage=true",
         "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
         "ConnectionStrings:DefaultConnection": "Server=localhost;Database=CommonApiDb;Trusted_Connection=True;MultipleActiveResultSets=true"
-    }
+    },
+    "cors": "*"
 }

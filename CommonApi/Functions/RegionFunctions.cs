@@ -18,7 +18,7 @@ namespace CommonApi.Functions
         }
 
         [Function("GetAllRegiones")]
-        public HttpResponseData GetAllRegiones([HttpTrigger(AuthorizationLevel.Function, "get", Route = "regiones")] HttpRequestData req)
+        public HttpResponseData GetAllRegiones([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "regiones")] HttpRequestData req)
         {
             var query = System.Web.HttpUtility.ParseQueryString(req.Url.Query);
             var paisId = Guid.Parse(query["paisId"]);
@@ -33,7 +33,7 @@ namespace CommonApi.Functions
         }
 
         [Function("GetRegionById")]
-        public HttpResponseData GetRegionById([HttpTrigger(AuthorizationLevel.Function, "get", Route = "regiones/{id}")] HttpRequestData req, Guid id)
+        public HttpResponseData GetRegionById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "regiones/{id}")] HttpRequestData req, Guid id)
         {
             var region = _context.Regiones.FirstOrDefault(r => r.Id == id);
             var response = req.CreateResponse(region != null ? System.Net.HttpStatusCode.OK : System.Net.HttpStatusCode.NotFound);

@@ -18,7 +18,7 @@ namespace CommonApi.Functions
         }
 
         [Function("GetAllCiudades")]
-        public HttpResponseData GetAllCiudades([HttpTrigger(AuthorizationLevel.Function, "get", Route = "ciudades")] HttpRequestData req)
+        public HttpResponseData GetAllCiudades([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "ciudades")] HttpRequestData req)
         {
             var query = System.Web.HttpUtility.ParseQueryString(req.Url.Query);
             var regionId = Guid.Parse(query["regionId"]);
@@ -33,7 +33,7 @@ namespace CommonApi.Functions
         }
 
         [Function("GetCiudadById")]
-        public HttpResponseData GetCiudadById([HttpTrigger(AuthorizationLevel.Function, "get", Route = "ciudades/{id}")] HttpRequestData req, Guid id)
+        public HttpResponseData GetCiudadById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "ciudades/{id}")] HttpRequestData req, Guid id)
         {
             var ciudad = _context.Ciudades.FirstOrDefault(c => c.Id == id);
             var response = req.CreateResponse(ciudad != null ? System.Net.HttpStatusCode.OK : System.Net.HttpStatusCode.NotFound);

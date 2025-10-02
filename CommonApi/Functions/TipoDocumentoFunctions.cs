@@ -18,7 +18,7 @@ namespace CommonApi.Functions
         }
 
         [Function("GetAllTiposDocumento")]
-        public HttpResponseData GetAllTiposDocumento([HttpTrigger(AuthorizationLevel.Function, "get", Route = "tiposdocumento")] HttpRequestData req)
+        public HttpResponseData GetAllTiposDocumento([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "tiposdocumento")] HttpRequestData req)
         {
             var query = System.Web.HttpUtility.ParseQueryString(req.Url.Query);
             var paisId = Guid.Parse(query["paisId"]);
@@ -33,7 +33,7 @@ namespace CommonApi.Functions
         }
 
         [Function("GetTipoDocumentoById")]
-        public HttpResponseData GetTipoDocumentoById([HttpTrigger(AuthorizationLevel.Function, "get", Route = "tiposdocumento/{id}")] HttpRequestData req, Guid id)
+        public HttpResponseData GetTipoDocumentoById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "tiposdocumento/{id}")] HttpRequestData req, Guid id)
         {
             var tipoDocumento = _context.TiposDocumento.FirstOrDefault(td => td.Id == id);
             var response = req.CreateResponse(tipoDocumento != null ? System.Net.HttpStatusCode.OK : System.Net.HttpStatusCode.NotFound);
